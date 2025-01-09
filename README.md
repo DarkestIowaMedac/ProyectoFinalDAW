@@ -1,2 +1,2 @@
 # ProyectoFinalDAW
-Reciclando.me Donde puedes localizar donde depositar tus desechos de manera segura y respetuosa con el medioambiente
+Reciclando.me Donde puedes localizar donde depositar tus desechos de manera segura y respetuosa con el medioambiente y mucho mas
