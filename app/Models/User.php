@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Restringe los campos a los que el usuario podrá escribir datos.
      *
      * @var list<string>
      */
@@ -44,5 +44,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Un usuario pertenece a una sede (relación inversa)
+     */
+    public function sede()
+    {
+        return $this->belongsTo(Sede::class);
+    }
+
+    /**
+     * Un usuario tiene muchas muestras
+     */
+    public function muestras()
+    {
+        return $this->hasMany(Muestra::class);
     }
 }
