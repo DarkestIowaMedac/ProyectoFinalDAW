@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -28,9 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idSede');
             $table->foreign('idSede')
                   ->references('id')
-                  ->on('sedes')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade'); // FK
+                  ->on('sedes'); // FK
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -18,6 +18,7 @@ return new class extends Migration
 
             // Campo añadido
             $table->string('nombre');
+            $table->string('codigo');
         });
     }
 
