@@ -66,3 +66,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.header-shadow-outset{
+  box-shadow: 0 4px 8px rgba(78, 78, 78, 0.8)
+}
+
+.menu-shadow-outset {
+  box-shadow: 4px 0 8px rgba(78, 78, 78, 0.8); /* Sombra solo a la derecha */
+  overflow: hidden;  /* Evita que la sombra se "desborde" en direcciones no deseadas */
+}
+
+.formulario-shadow-inset {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8); /* Sombra interna en todos los lados */
+}
+.formulario-shadow-outset {
+  box-shadow:  0 0 8px rgba(78, 78, 78, 0.8); /* Sombra interna en todos los lados */
+}
+.formulario-shadow-outset2 {
+  box-shadow:  0 0 8px rgba(21, 36, 120, 0.8); /* Sombra interna en todos los lados */
+}
