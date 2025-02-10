@@ -24,4 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('/muestras', [MuestraController::class, 'crearMuestra']); 
+    Route::get('/muestras/{idMuestra}', [MuestraController::class, 'verMuestra']); 
+    Route::delete('/muestras/{idMuestra}', [MuestraController::class, 'borrarMuestra']); 
+});
+
 require __DIR__.'/auth.php';
