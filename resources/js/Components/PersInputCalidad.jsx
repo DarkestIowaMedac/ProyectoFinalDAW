@@ -12,8 +12,8 @@ export function PersInputCalidad (){
     <>
         <label htmlFor="calidad">Calidad de la muestra:</label>
             <br />
-        <select name="calidad" id="calidad" required>
-            <option value="" disabled selected>Calidad</option>
+        <select name="calidad" id="calidad" required defaultValue="">
+            <option value="" disabled>Calidad</option>
 
             {
                 calidades.map((calidad, index) => {
@@ -29,7 +29,7 @@ export function PersInputCalidad (){
 
             <br />
 
-        <label for="descripcioncalidad">Descripción de la Calidad:</label>
+        <label htmlFor="descripcioncalidad">Descripción de la Calidad:</label>
             <br />
         <textarea id="descripcioncalidad" name="descripcioncalidad" placeholder="Proporciona más detalles sobre la calidad de la muestra"></textarea>
 

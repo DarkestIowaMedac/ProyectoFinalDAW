@@ -12,8 +12,8 @@ export function PersInputBiopsia (){
     <>
         <label htmlFor="biopsia">Selecciona el tipo de biopsia:</label>
         <br />
-        <select name="biopsia" id="biopsia" required>
-            <option value="" disabled selected>Biopsia</option>
+        <select name="biopsia" id="biopsia" required defaultValue="">
+            <option value="" disabled>Biopsia</option>
 
             {
                 biopsias.map((biopsia, index) => {
