@@ -4,6 +4,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
+
+
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -11,7 +14,22 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+        idSede:''
     });
+
+    const [sedes, setSedes] = useState([]);
+
+    useEffect(() => {
+        // Aquí puedes hacer la llamada para obtener las sedes
+        fetch('/public/sedes') // Asegúrate de que esta URL sea correcta
+            .then(response => response.json())
+            .then(data => {
+                setSedes(data);
+            })
+            .catch(error => {
+                console.error('Error al obtener las sedes:', error);
+            });
+    }, []);
 
     const submit = (e) => {
         e.preventDefault();
@@ -92,6 +110,21 @@ export default function Register() {
                     />
     
                     <InputError message={errors.password_confirmation} className="mt-2 text-red-400" />
+                </div>
+
+                <div className="mb-3 text-black">
+                    <label htmlFor="idSede" className="form-label">Seleccione su sede</label>
+                    <select name="idSede" value={data.idSede} id="idSede" className="form-control"
+                    onChange={(e) => setData('idSede', e.target.value)}required>
+
+                        <option value="">-- Seleccione una sede --</option>
+                        {Array.isArray(sedes) && sedes.map((sede) => (
+                            <option key={sede.id} value={sede.id}>
+                            {sede.nombre}
+                        </option>
+                        ))}
+                    </select>
+                    {errors.idSede && <div className="text-danger">{errors.idSede}</div>}
                 </div>
     
                 <div className="mt-4 flex items-center justify-between">
