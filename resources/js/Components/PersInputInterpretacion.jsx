@@ -1,117 +1,105 @@
-import { useState } from "react"
+import { useState } from "react";
 
-export function PersInputInterpretacion (){
-
+export function PersInputInterpretacion() {
     const [interpretaciones, setInterpretaciones] = useState([
-        {
-            codigo:"",
-            descripcion:""
-        }   
-    ])
+        { codigo: "", descripcion: "" },
+    ]);
 
     const anyadir = () => {
-        setInterpretaciones([
-            ...interpretaciones,
-            {
-                codigo:"",
-                descripcion:""
-            }
-        ])
-        console.log(interpretaciones)
-    }
+        setInterpretaciones([...interpretaciones, { codigo: "", descripcion: "" }]);
+    };
 
     const borrar = () => {
-        if (interpretaciones.length<=1) {
-            alert("Debe haber mínimo 1 interpretación")
-        }else{
-            setInterpretaciones(interpretaciones.slice(0, -1))
+        if (interpretaciones.length <= 1) {
+            alert("Debe haber mínimo 1 interpretación");
+        } else {
+            setInterpretaciones(interpretaciones.slice(0, -1));
         }
-        console.log(interpretaciones)
-    }
+    };
 
     const actualizarCodigo = (indice, nuevoCodigo) => {
-        const nuevasInterpretaciones = [...interpretaciones]
-        
-        nuevasInterpretaciones[indice].codigo=nuevoCodigo
-
-        setInterpretaciones(nuevasInterpretaciones)
-    }
+        const nuevasInterpretaciones = [...interpretaciones];
+        nuevasInterpretaciones[indice].codigo = nuevoCodigo;
+        setInterpretaciones(nuevasInterpretaciones);
+    };
 
     const actualizarDescripcion = (indice, nuevaDescripcion) => {
-        const nuevasInterpretaciones = [...interpretaciones]
-        
-        nuevasInterpretaciones[indice].descripcion=nuevaDescripcion
+        const nuevasInterpretaciones = [...interpretaciones];
+        nuevasInterpretaciones[indice].descripcion = nuevaDescripcion;
+        setInterpretaciones(nuevasInterpretaciones);
+    };
 
-        setInterpretaciones(nuevasInterpretaciones)
-    }
+    return (
+        <div className="flex justify-center p-4 xs:p-6 items-center rounded-lg py-6 shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
+            <div className="space-y-4 p-4 xs:p-6 border rounded-lg shadow-lg bg-white w-full max-w-xs xs:max-w-sm md:max-w-lg">
+                <h2 className="text-xl xs:text-lg font-bold text-center mb-4 bg-gray-900 p-2 rounded-xl text-white">
+                    Interpretación de la Muestra
+                </h2>
 
-    return(
-    <>
-
-        {
-            interpretaciones.map((interpretacion,index) => {
-                return(
-                    <div key={index}>
-
-                        <label 
-                            htmlFor="descripcion"
+                {interpretaciones.map((interpretacion, index) => (
+                    <div key={index} className="border-b pb-4 mb-4">
+                        {/* Código de Interpretación */}
+                        <label
+                            htmlFor={`codigo-${index}`}
+                            className="block text-lg font-semibold text-gray-700"
                         >
                             Código de interpretación:
                         </label>
-
-                            <br />
-                        
-                        <select 
-                            name="descripcion" 
-                            className="descripcion" 
-                            required
+                        <select
+                            name="codigo"
+                            id={`codigo-${index}`}
                             value={interpretacion.codigo}
                             onChange={(e) => actualizarCodigo(index, e.target.value)}
+                            required
+                            className="block w-full p-2 xs:p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
                         >
-                            <option value="" disabled>Calidad</option>
+                            <option value="" disabled>
+                                Seleccionar Código
+                            </option>
                             <option value="Código 1">Código 1</option>
                             <option value="Código 2">Código 2</option>
                             <option value="Código 3">Código 3</option>
                         </select>
-                
-                            <br />
-                
-                        <label htmlFor="descripcioncalidad">Descripción de la interpretación:</label>
-                            <br />
-                        <textarea 
-                            className="descripcion" 
-                            name="descripcioncalidad" 
-                            placeholder="Proporciona más detalles sobre la descripcion de la muestra"
+
+                        {/* Descripción de la Interpretación */}
+                        <label
+                            htmlFor={`descripcion-${index}`}
+                            className="block text-lg font-semibold text-gray-700 mt-4"
+                        >
+                            Descripción de la interpretación:
+                        </label>
+                        <textarea
+                            id={`descripcion-${index}`}
+                            name="descripcioncalidad"
+                            placeholder="Proporciona más detalles sobre la interpretación..."
                             value={interpretacion.descripcion}
                             onChange={(e) => actualizarDescripcion(index, e.target.value)}
-                        ></textarea>
-                            <br />
+                            className="block w-full p-2 xs:p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 resize-none h-20 xs:h-24"
+                        />
                     </div>
-                )
-            
-            })
-        }
+                ))}
+                <div className="flex justify-between flex-wrap md:justify-center sm:justify-center sm:gap-4 md:gap-4">
+                    <button
+                        className="lg:px-3 lg:py-2 md:px-3 md:py-2 sm:px-2 sm:py-1 bg-green-500 text-white font-semibold rounded-lg shadow hover:bg-green-600 transition duration-300 flex-2"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            anyadir();
+                        }}
+                    >
+                        Añadir Interpretación
+                    </button>
 
-        <button 
-            className="px-4 py-2 border border-green-400"
-            onClick={(e)=>{
-                e.preventDefault()
-                anyadir()
-            }}
-        >
-            Añadir Interpretación
-        </button>
-
-        <button 
-            className="px-4 py-2 border border-green-400"
-            onClick={(e)=>{
-                e.preventDefault()
-                borrar()
-            }}
-        >
-            Eliminar Interpretación
-        </button>
-    </>
-    )
-
+                    <button
+                        className="lg:px-3 lg:py-2 md:px-3 md:py-2 sm:px-2 sm:py-1 bg-red-500 text-white font-semibold rounded-lg shadow hover:bg-red-600 transition duration-300 flex-2"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            borrar();
+                        }}
+                    >
+                        Eliminar Interpretación
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
 }

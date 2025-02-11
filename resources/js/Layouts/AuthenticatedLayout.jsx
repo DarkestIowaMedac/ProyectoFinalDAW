@@ -10,9 +10,9 @@ export default function AuthenticatedLayout({ header, children }) {
     const [menuOpen, setMenuOpen] = useState(false); // Estado para la hamburguesa
 
     return (
-        <div className="min-h-screen bg-slate-300">
+        <div className="bg-slate-300">
             {/* NAVBAR ARRIBA */}
-            <div className="bg-gradient-to-r from-gray-800 via-blue-950 to-slate-950 text-white fixed w-full top-0 left-0 z-20 shadow-md shadow-gray-900">
+            <div className="bg-gradient-to-r from-gray-800 via-blue-950 to-slate-950 text-white fixed w-full  z-20 shadow-md shadow-gray-900">
                 <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4">
                     <div className="flex h-16 justify-between w-full">
                         <div className="flex items-center">
@@ -91,7 +91,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 </header>
             )}
 
-            <main className="md:ml-64 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-8 mb-72 transition-all">
+            <main className="md:ml-64 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6  transition-all">
                 {children}
             </main>
 
