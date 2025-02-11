@@ -3,6 +3,7 @@ import FormInsertLayout from '@/Layouts/FormInsertLayout';
 
 import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 export default function Formulario() {
 
@@ -25,7 +26,7 @@ export default function Formulario() {
 
     return (
 
-        <>
+        <BrowserRouter>
 
         <AuthenticatedLayout
             header={
@@ -39,6 +40,6 @@ export default function Formulario() {
             <FormInsertLayout></FormInsertLayout>
 
         </AuthenticatedLayout>
-        </>
+        </BrowserRouter>
     );
 }
