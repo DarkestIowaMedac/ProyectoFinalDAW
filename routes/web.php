@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
+use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -29,9 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware('auth')->group(function () {
-    Route::post('/muestras', [MuestraController::class, 'crearMuestra']); 
-    Route::get('/muestras/{idMuestra}', [MuestraController::class, 'verMuestra']); 
-    Route::delete('/muestras/{idMuestra}', [MuestraController::class, 'borrarMuestra']); 
+    Route::post('/muestras', [MuestraController::class, 'crearMuestra']);
+    Route::get('/muestras/{idMuestra}', [MuestraController::class, 'verMuestra']);
+    Route::delete('/muestras/{idMuestra}', [MuestraController::class, 'borrarMuestra']);
 });
 
 Route::get('/sedes', [SedeController::class, 'index']);
