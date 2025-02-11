@@ -21,7 +21,7 @@ export default function Register() {
 
     useEffect(() => {
         // Aquí puedes hacer la llamada para obtener las sedes
-        fetch('/public/sedes') // Asegúrate de que esta URL sea correcta
+        fetch(`/ProyectoSubidaNotaDAW/public/sedes`) // Asegúrate de que esta URL sea correcta
             .then(response => response.json())
             .then(data => {
                 setSedes(data);
@@ -30,6 +30,8 @@ export default function Register() {
                 console.error('Error al obtener las sedes:', error);
             });
     }, []);
+
+    console.log(sedes)
 
     const submit = (e) => {
         e.preventDefault();
@@ -119,6 +121,7 @@ export default function Register() {
 
                         <option value="">-- Seleccione una sede --</option>
                         {Array.isArray(sedes) && sedes.map((sede) => (
+
                             <option key={sede.id} value={sede.id}>
                             {sede.nombre}
                         </option>

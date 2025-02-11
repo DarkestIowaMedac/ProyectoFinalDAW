@@ -59,8 +59,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             Inicio
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink
-                            href="/formulario"
+                        <ResponsiveNavLink href={route('formulario')} active={route().current('formulario')}
                             className="py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105 flex items-center"
                         >
                             <span className="material-icons text-blue-400 mr-2">create</span>
