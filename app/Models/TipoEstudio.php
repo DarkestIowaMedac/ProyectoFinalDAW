@@ -10,6 +10,8 @@ class TipoEstudio extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
+    protected $table = 'tipos_estudio'; // Nombre de la tabla a la que apunta el modelo
+
     /**
      * Restringe los campos a los que el usuario podrá escribir datos.
      *
