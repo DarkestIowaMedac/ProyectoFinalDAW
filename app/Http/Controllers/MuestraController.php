@@ -117,7 +117,15 @@ class MuestraController extends Controller
     ImageOptimizer::optimize($pathToImage);
     $optimizerChain->optimize([$pathToImage1, $pathToImage2]);
     */
+    public function verTodas(Request $request) {
 
+        $idUsuario = Auth::id();
+        $muestras = Muestra::where('idUsuario', $idUsuario)->get();
+        if ($muestras->isEmpty()) {
+            return response()->json(['message' => 'No hay muestras disponibles para este usuario.'], 404);
+        }
+        return response()->json($muestras, 200);
+    }
     public function verMuestra(Request $request, $idMuestra) {
 
         // Se tiene que comprobar que la idUsuario de la muestra, es decir, su propietario, 
@@ -129,7 +137,7 @@ class MuestraController extends Controller
             return response()->json(['error' => 'La muestra no existe.'], 404);
         }
 
-        if ($muestra->idUsuario !== $idUsuario) {
+        if ($muestra->idUsuario != $idUsuario) {
             return response()->json(['error' => 'No tienes permiso para ver esta muestra.'], 403);
         }
     
