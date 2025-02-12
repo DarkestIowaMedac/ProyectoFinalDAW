@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Un usuario pertenece a una sede (relación inversa)
+     * Un usuario pertenece a una sede
      */
     public function sede()
     {

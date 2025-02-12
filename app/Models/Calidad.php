@@ -28,10 +28,10 @@ class Calidad extends Model
     }
 
     /**
-     * Una calidad pertenece a un tipo de estudio
+     * Una calidad pertenece a una naturaleza
      */
-    public function tiposEstudios()
+    public function naturalezas()
     {
-        return $this->belongsTo(TipoEstudio::class);
+        return $this->belongsTo(Naturaleza::class);
     }
 }

@@ -33,9 +33,9 @@ class Muestra extends Model
      * Ver también:
      * https://desarrolloweb.com/articulos/relaciones-n-a-m-laravel-eloquent.html
      */
-    public function interpretacion()
+    public function interpretaciones()
     {
-        return $this->belongsToMany(interpretacion::class, 'interpretacion_muestra', 'idInterpretacion', 'idMuestra');
+        return $this->belongsToMany(Interpretacion::class, 'interpretacion_muestra', 'idInterpretacion', 'idMuestra');
     }
 
     /**
