@@ -56,22 +56,27 @@ export function PersInputFotos() {
                 accept="image/*"
                 multiple
                 onChange={(e) => urlImages(e)}
+                className="mb-4"
             />
 
-            <div id="imgcontainer" className="flex flex-wrap">
+            <div id="imgcontainer" className="flex flex-wrap justify-start gap-5">
                 {isLoading ? (
                     // Mostrar un indicador de carga mientras se suben las imágenes
-                    <div className="w-full mt-5">
+                    <div className="w-full mt-5 text-center">
                         <p className="text-lg font-semibold">Cargando imágenes...</p>
                         <div className="loader mt-2"></div> {/* Puedes usar un spinner aquí */}
                     </div>
                 ) : (
                     // Mostrar las imágenes subidas
                     arrayImages.map((url, index) => (
-                        <div key={index} className="mt-5 mr-5">
-                            <img src={url} alt={url} className="w-32" />
+                        <div key={index} className="mt-5">
+                            <img 
+                                src={url} 
+                                alt={url} 
+                                className="w-32 h-32 rounded-full object-cover" 
+                            />
                             <select
-                                className="w-32"
+                                className="mt-2 w-32 p-2 bg-white border border-gray-300 rounded-lg"
                                 name="aumento"
                                 id="aumento"
                                 required
