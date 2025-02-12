@@ -17,7 +17,7 @@ class Naturaleza extends Model
      */
     protected $fillable = [
         'codigo',
-        'nombre',
+        'tipoEstudio',
     ];
 
     /**
@@ -26,21 +26,5 @@ class Naturaleza extends Model
     public function muestras()
     {
         return $this->hasMany(Muestra::class);
-    }
-
-    /**
-     * Una naturaleza tiene muchas interpretaciones
-     */
-    public function interpretaciones()
-    {
-        return $this->hasMany(Interpretacion::class);
-    }
-
-    /**
-     * Una naturaleza tiene muchas calidades
-     */
-    public function calidades()
-    {
-        return $this->hasMany(Calidad::class);
     }
 }

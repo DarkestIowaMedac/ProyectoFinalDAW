@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('interpretacion_muestra', function (Blueprint $table) {
             // Campos genéricos
             $table->id(); // PK
-            // Comento esta línea, ya que esta tabla pivote no necesita marcas de tiempo.
-            // $table->timestamps();
+            // $table->timestamps(); // Este campo no es necesario al ser ésta una tabla pivote
 
             // Campos añadidos
             $table->unsignedBigInteger('idInterpretacion');
@@ -27,10 +26,10 @@ return new class extends Migration
 
             $table->unsignedBigInteger('idMuestra');
             $table->foreign('idMuestra')
-                  ->references('id')
-                  ->on('muestras')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade'); // FK
+                ->references('id')
+                ->on('muestras')
+                ->onUpdate('cascade')
+                ->onDelete('cascade'); // FK
 
             $table->text('descripcionInterpretacion');
         });

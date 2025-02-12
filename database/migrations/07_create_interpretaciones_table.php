@@ -17,10 +17,10 @@ return new class extends Migration
             $table->timestamps();
 
             // Campos añadidos
-            $table->unsignedBigInteger('idTipoEstudio');
-            $table->foreign('idTipoEstudio')
+            $table->unsignedBigInteger('idNaturaleza');
+            $table->foreign('idNaturaleza')
                   ->references('id')
-                  ->on('tipos_estudio')
+                  ->on('naturalezas')
                   ->onUpdate('cascade')
                   ->onDelete('cascade'); // FK
 
