@@ -30,9 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware('auth')->group(function () {
-    Route::post('/muestras', [MuestraController::class, 'crearMuestra']);
-    Route::get('/muestras/{idMuestra}', [MuestraController::class, 'verMuestra']);
-    Route::delete('/muestras/{idMuestra}', [MuestraController::class, 'borrarMuestra']);
+    Route::post('/crearMuestra', [MuestraController::class, 'crearMuestra']);
+    Route::patch('/editarMuestra', [MuestraController::class, 'editarMuestra']);
+    Route::get('/muestra/{idMuestra}', [MuestraController::class, 'verMuestra']);
+    Route::delete('/borrarMuestra/{idMuestra}', [MuestraController::class, 'borrarMuestra']);
+    Route::get('/muestras', [MuestraController::class, 'verTodas']);
 });
 
 Route::get('/sedes', [SedeController::class, 'index']);

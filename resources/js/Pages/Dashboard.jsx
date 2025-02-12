@@ -1,11 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { BrowserRouter } from 'react-router-dom';
-import { PersMuestra } from '@/Components/PersMuestra';
+import { TodasMuestras } from '@/Layouts/TodasMuestras';
 
 export default function Dashboard() {
 
-    
+
 
     return (
         <BrowserRouter>
@@ -27,6 +27,7 @@ export default function Dashboard() {
 
                             {/* Contenedor de las muestras */}
                             <div className="bg-gray-700 text-white p-4 rounded-lg shadow-md">
+                                <TodasMuestras></TodasMuestras>
                             </div>
                         </div>
                     </div>
