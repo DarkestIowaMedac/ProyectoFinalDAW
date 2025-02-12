@@ -5,8 +5,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Head title="Bienvenido" />
 
-            {/* Fondo con imagen y overlay oscuro */}
-            <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/background.jpg')" }}>
+            <div className="relative min-h-screen bg-cover bg-center">
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950"></div>
 
                 {/* Contenido Principal */}
@@ -53,7 +52,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
 
                 {/* Sección de Información */}
-                <section className="relative z-10 bg-white text-gray-800 py-16 text-center">
+                <section className="relative z-10 bg-white text-blue-950 py-16 text-center">
                     <h2 className="text-3xl font-bold">¿Por qué elegirnos?</h2>
                     <p className="mt-4 text-lg max-w-3xl mx-auto">
                         Nuestra plataforma ofrece seguridad, rapidez y facilidad en la gestión de datos. Explora todas nuestras herramientas y optimiza tu flujo de trabajo.
@@ -76,7 +75,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </section>
 
                 {/* Footer */}
-                <footer className="bg-gray-900 text-gray-400 text-center py-6">
+                <footer className="bg-black text-gray-400 text-center py-6">
                     <p>Laravel v{laravelVersion} | PHP v{phpVersion}</p>
                 </footer>
             </div>
