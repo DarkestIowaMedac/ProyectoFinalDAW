@@ -19,7 +19,7 @@ export default function FormInsertLayout() {
                     <PersInputBiopsia />
                     <PersInputCalidad />
                     <PersInputInterpretacion />
-                    <PersInputFotos></PersInputFotos>
+                    <PersInputFotos/>
                 </div>
             </form>
         </div>
