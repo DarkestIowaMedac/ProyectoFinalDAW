@@ -9,46 +9,19 @@ import { PersInputFotos } from '@/Components/PersInputFotos';
 
 export default function FormInsertLayout() {
     return (
-
-        <>
-            <form action="">
-
-                <h1>codigomuestra: A123456</h1>
-                
-                <br />
-
-                <PersInputFecha></PersInputFecha>
-            
-                <br /><br />
-
-                <PersInputNaturaleza></PersInputNaturaleza>
-
-                <br />
-
-                <PersInputConservacion></PersInputConservacion>
-
-                <br /> <br />
-
-                <PersInputCiudad></PersInputCiudad>
-
-                <br /><br />
-
-                <PersInputBiopsia></PersInputBiopsia>
-
-                <br /><br />
-
-                <PersInputCalidad></PersInputCalidad>
-
-                <br /><br />
-
-                <PersInputInterpretacion></PersInputInterpretacion>
-
-                <br /> <br />
-
-                <PersInputFotos></PersInputFotos>
-
+        <div className="flex justify-center items-center min-h-screen p-4 mb-10">
+            <form action="" className="w-full max-w-5xl p-6 sm:p-8 bg-slate-50 rounded-xl shadow-lg">
+                <div className="space-y-6">
+                    <PersInputFecha />
+                    <PersInputNaturaleza />
+                    <PersInputConservacion />
+                    <PersInputCiudad />
+                    <PersInputBiopsia />
+                    <PersInputCalidad />
+                    <PersInputInterpretacion />
+                    <PersInputFotos></PersInputFotos>
+                </div>
             </form>
-        </>
-
+        </div>
     );
 }

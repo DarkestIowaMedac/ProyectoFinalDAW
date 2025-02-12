@@ -1,34 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState } from "react";
 
 export default function PersInputFecha() {
   // Obtener la fecha actual en formato YYYY-MM-DD
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes en formato 2 dígitos
-    const day = String(today.getDate()).padStart(2, '0'); // Día en formato 2 dígitos
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
   // Estado para manejar la fecha
   const [selectedDate, setSelectedDate] = useState(getCurrentDate());
 
-  // Manejar el cambio de la fecha
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value); // Actualiza el estado con la nueva fecha seleccionada
-  };
-
   return (
-    <>
-      <legend>Fecha:</legend>
-      <input
-        type="date"
-        id="fecha"
-        name="fecha"
-        value={selectedDate} // Valor inicial es la fecha actual
-        onChange={handleDateChange} // Permite cambiar la fecha
-        required
-      />
-    </>
+    <div className="bg-white p-8 rounded-lg shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
+      <div className="flex flex-col items-center space-y-4 p-6 border rounded-lg bg-white shadow-lg max-w-full sm:max-w-md mx-auto">
+        <h2 className="lg:text-2xl md:text-xl sm:text-lg w-full font-bold text-center mb-6 bg-gray-900 p-2 sm:p-1 rounded-xl text-white">
+          Fecha de registro
+        </h2>
+
+        <input
+          type="date"
+          id="fecha"
+          name="fecha"
+          value={selectedDate}
+          onChange={(event) => setSelectedDate(event.target.value)}
+          required
+          className="block w-full lg:p-3 md:p-2 sm:p-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 text-lg md:text-base sm:text-sm"
+        />
+
+      </div>
+    </div>
   );
 }

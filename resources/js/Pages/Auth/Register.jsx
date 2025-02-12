@@ -14,14 +14,14 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
-        idSede:''
+        idSede: ''
     });
 
     const [sedes, setSedes] = useState([]);
 
     useEffect(() => {
         // Aquí puedes hacer la llamada para obtener las sedes
-        fetch(`/ProyectoSubidaNotaDAW/public/sedes`) // Asegúrate de que esta URL sea correcta
+        fetch('/public/sedes') // Asegúrate de que esta URL sea correcta
             .then(response => response.json())
             .then(data => {
                 setSedes(data);
@@ -30,8 +30,6 @@ export default function Register() {
                 console.error('Error al obtener las sedes:', error);
             });
     }, []);
-
-    console.log(sedes)
 
     const submit = (e) => {
         e.preventDefault();
@@ -44,11 +42,11 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
-    
+
             <form onSubmit={submit} className="text-white">
                 <div>
                     <InputLabel htmlFor="name" value="Name" className="text-white" />
-    
+
                     <TextInput
                         id="name"
                         name="name"
@@ -59,13 +57,13 @@ export default function Register() {
                         onChange={(e) => setData('name', e.target.value)}
                         required
                     />
-    
+
                     <InputError message={errors.name} className="mt-2 text-red-400" />
                 </div>
-    
+
                 <div className="mt-4">
                     <InputLabel htmlFor="email" value="Email" className="text-white" />
-    
+
                     <TextInput
                         id="email"
                         type="email"
@@ -76,13 +74,13 @@ export default function Register() {
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
-    
+
                     <InputError message={errors.email} className="mt-2 text-red-400" />
                 </div>
-    
+
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" className="text-white" />
-    
+
                     <TextInput
                         id="password"
                         type="password"
@@ -93,13 +91,13 @@ export default function Register() {
                         onChange={(e) => setData('password', e.target.value)}
                         required
                     />
-    
+
                     <InputError message={errors.password} className="mt-2 text-red-400" />
                 </div>
-    
+
                 <div className="mt-4">
                     <InputLabel htmlFor="password_confirmation" value="Confirm Password" className="text-white" />
-    
+
                     <TextInput
                         id="password_confirmation"
                         type="password"
@@ -110,26 +108,26 @@ export default function Register() {
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         required
                     />
-    
+
                     <InputError message={errors.password_confirmation} className="mt-2 text-red-400" />
                 </div>
 
-                <div className="mb-3 text-black">
-                    <label htmlFor="idSede" className="form-label">Seleccione su sede</label>
-                    <select name="idSede" value={data.idSede} id="idSede" className="form-control"
-                    onChange={(e) => setData('idSede', e.target.value)}required>
-
-                        <option value="">-- Seleccione una sede --</option>
-                        {Array.isArray(sedes) && sedes.map((sede) => (
-
-                            <option key={sede.id} value={sede.id}>
+                <select
+                    id="idSede"
+                    name="idSede"
+                    value={data.idSede}
+                    onChange={(e) => setData('idSede', e.target.value)}
+                    required
+                    className="mt-5 block w-full bg-gray-800 border border-gray-700 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2"
+                >
+                    <option value="">-- Seleccione una sede --</option>
+                    {Array.isArray(sedes) && sedes.map((sede) => (
+                        <option key={sede.id} value={sede.id} className="bg-gray-800 text-white">
                             {sede.nombre}
                         </option>
-                        ))}
-                    </select>
-                    {errors.idSede && <div className="text-danger">{errors.idSede}</div>}
-                </div>
-    
+                    ))}
+                </select>
+
                 <div className="mt-4 flex items-center justify-between">
                     <Link
                         href={route('login')}
@@ -137,7 +135,7 @@ export default function Register() {
                     >
                         Already registered?
                     </Link>
-    
+
                     <PrimaryButton className="ms-4 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition" disabled={processing}>
                         Register
                     </PrimaryButton>
@@ -145,5 +143,5 @@ export default function Register() {
             </form>
         </GuestLayout>
     );
-    
+
 }

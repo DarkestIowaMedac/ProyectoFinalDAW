@@ -25,6 +25,7 @@ return new class extends Migration
                   ->onDelete('cascade'); // FK
 
             $table->string('ruta');
+            $table->string('zoom');
         });
     }
 
