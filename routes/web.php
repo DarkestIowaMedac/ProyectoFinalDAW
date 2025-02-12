@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
+use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 
@@ -38,5 +39,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/sedes', [SedeController::class, 'index']);
+
+
+Route::get('formatos', [FormatoController::class, 'index']);
+Route::get('formatos/create', [FormatoController::class, 'create']);
+Route::post('formatos', [FormatoController::class, 'store']);
+Route::get('formatos/{formato}', [FormatoController::class, 'show']);
+Route::get('formatos/{formato}/edit', [FormatoController::class, 'edit']);
+Route::put('formatos/{formato}', [FormatoController::class, 'update']);
+Route::delete('formatos/{formato}', [FormatoController::class, 'destroy']);
+
 
 require __DIR__.'/auth.php';
