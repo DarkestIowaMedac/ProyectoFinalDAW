@@ -26,7 +26,7 @@ export default function Dashboard() {
                             </div>
 
                             {/* Contenedor de las muestras */}
-                            <div className="bg-gray-700 text-white p-4 rounded-lg shadow-md">
+                            <div>
                                 <TodasMuestras></TodasMuestras>
                             </div>
                         </div>

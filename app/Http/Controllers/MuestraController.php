@@ -41,7 +41,7 @@ class MuestraController extends Controller
         
         //Creación de la muestra (imagen más adelante)
         $muestra = new Muestra();
-        $muestra->idUsuario = Auth::id();
+        $muestra->idUser = Auth::id();
         $muestra->idSede = $request->idSede;
         $muestra->idFormato = $request->idFormato;
         $muestra->idNaturaleza = $request->idNaturaleza;
@@ -120,7 +120,7 @@ class MuestraController extends Controller
     public function verTodas(Request $request) {
 
         $idUsuario = Auth::id();
-        $muestras = Muestra::where('idUsuario', $idUsuario)->get();
+        $muestras = Muestra::where('idUser', $idUsuario)->get();
         if ($muestras->isEmpty()) {
             return response()->json(['message' => 'No hay muestras disponibles para este usuario.'], 404);
         }
@@ -242,7 +242,7 @@ class MuestraController extends Controller
             return response()->json(['error' => 'La muestra no existe.'], 404);
         }
 
-        if ($muestra->idUsuario !== $idUsuario) {
+        if ($muestra->idUser !== $idUsuario) {
             return response()->json(['error' => 'No tienes permiso para borrar esta muestra.'], 403);
         }
         $muestra->delete();

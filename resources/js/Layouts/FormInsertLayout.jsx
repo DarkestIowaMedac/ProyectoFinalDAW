@@ -10,7 +10,7 @@ import { PersInputFotos } from '@/Components/PersInputFotos';
 export default function FormInsertLayout() {
     return (
         <div className="flex justify-center items-center min-h-screen p-4 mb-10">
-            <form action="" className="w-full max-w-5xl p-6 sm:p-8 bg-slate-50 rounded-xl shadow-lg">
+            <form action="/" className="w-full max-w-5xl p-6 sm:p-8 bg-slate-50 rounded-xl shadow-lg">
                 <div className="space-y-6">
                     <PersInputFecha />
                     <PersInputNaturaleza />
@@ -20,6 +20,8 @@ export default function FormInsertLayout() {
                     <PersInputCalidad />
                     <PersInputInterpretacion />
                     <PersInputFotos/>
+
+                    <input type="submit" />
                 </div>
             </form>
         </div>

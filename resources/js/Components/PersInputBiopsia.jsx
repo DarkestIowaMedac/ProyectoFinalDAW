@@ -40,7 +40,7 @@ export function PersInputBiopsia() {
                     </label>
 
                     <select
-                        name="biopsia"
+                        name="id"
                         id="biopsia"
                         value={selectedBiopsy}
                         onChange={handleChange}
