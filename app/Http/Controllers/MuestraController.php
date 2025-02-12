@@ -129,7 +129,7 @@ class MuestraController extends Controller
             return response()->json(['error' => 'La muestra no existe.'], 404);
         }
 
-        if ($muestra->idUsuario !== $idUsuario) {
+        if ($muestra->idUser !== $idUsuario) {
             return response()->json(['error' => 'No tienes permiso para ver esta muestra.'], 403);
         }
     
