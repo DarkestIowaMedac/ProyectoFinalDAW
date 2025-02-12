@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/editarMuestra', [MuestraController::class, 'editarMuestra']);
     Route::get('/muestra/{idMuestra}', [MuestraController::class, 'verMuestra']);
     Route::delete('/borrarMuestra/{idMuestra}', [MuestraController::class, 'borrarMuestra']);
-    Route::get('/muestras', [MuestraController::class, 'verTodas'])
+    Route::get('/muestras', [MuestraController::class, 'verTodas']);
 });
 
 Route::get('/sedes', [SedeController::class, 'index']);

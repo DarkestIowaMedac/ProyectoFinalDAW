@@ -158,7 +158,7 @@ class MuestraController extends Controller
             
             //Edición de la muestra (imagen más adelante)
         
-            $muestra->idUsuario = Auth::id();
+            $muestra->idUser = Auth::id();
             $muestra->idSede = $request->idSede;
             $muestra->idFormato = $request->idFormato;
             $muestra->idNaturaleza = $request->idNaturaleza;
