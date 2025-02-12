@@ -49,7 +49,7 @@ export function PersInputFotos() {
     };
 
     return (
-        <>
+        <div className="flex justify-center p-4 xs:p-6 items-center rounded-lg py-6 shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
             <input
                 id="imgs"
                 type="file"
@@ -76,7 +76,7 @@ export function PersInputFotos() {
                                 className="w-32 h-32 rounded-full object-cover" 
                             />
                             <select
-                                className="mt-2 w-32 p-2 bg-white border border-gray-300 rounded-lg"
+                                className="mt-2 w-32 p-2 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none hover:border-blue-500 transition duration-300 ease-in-out"
                                 name="aumento"
                                 id="aumento"
                                 required
@@ -95,6 +95,6 @@ export function PersInputFotos() {
                     ))
                 )}
             </div>
-        </>
+        </div>
     );
 }
