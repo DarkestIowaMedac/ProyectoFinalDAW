@@ -5,6 +5,7 @@ import { PersInputCiudad } from '@/Components/PersInputCiudad';
 import { PersInputBiopsia } from '@/Components/PersInputBiopsia';
 import { PersInputCalidad } from '@/Components/PersInputCalidad';
 import { PersInputInterpretacion } from '@/Components/PersInputInterpretacion';
+import { PersInputFotos } from '@/Components/PersInputFotos';
 
 export default function FormInsertLayout() {
     return (
@@ -18,6 +19,7 @@ export default function FormInsertLayout() {
                     <PersInputBiopsia />
                     <PersInputCalidad />
                     <PersInputInterpretacion />
+                    <PersInputFotos/>
                 </div>
             </form>
         </div>
