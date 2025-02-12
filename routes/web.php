@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::post('/crearMuestra', [MuestraController::class, 'crearMuestra']);
-    Route::patch('/editarMuestra', [MuestraController::class, 'editarMuestra']);
+    Route::patch('/editarMuestra/{idMuestra}', [MuestraController::class, 'editarMuestra']);
     Route::get('/muestra/{idMuestra}', [MuestraController::class, 'verMuestra']);
     Route::delete('/borrarMuestra/{idMuestra}', [MuestraController::class, 'borrarMuestra']);
     Route::get('/muestras', [MuestraController::class, 'verTodas']);
@@ -41,13 +41,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/sedes', [SedeController::class, 'index']);
 
 
-Route::get('formatos', [FormatoController::class, 'index']);
-Route::get('formatos/create', [FormatoController::class, 'create']);
-Route::post('formatos', [FormatoController::class, 'store']);
-Route::get('formatos/{formato}', [FormatoController::class, 'show']);
-Route::get('formatos/{formato}/edit', [FormatoController::class, 'edit']);
-Route::put('formatos/{formato}', [FormatoController::class, 'update']);
-Route::delete('formatos/{formato}', [FormatoController::class, 'destroy']);
+Route::get('/formatos', [FormatoController::class, 'index']);
+Route::get('/formatos/crear', [FormatoController::class, 'create']);
+Route::get('/formatos/mostrar/{id}', [FormatoController::class, 'show']);
+Route::get('/formatos/editar/{id}', [FormatoController::class, 'edit']);
+Route::put('/formatos/{id}', [FormatoController::class, 'update']);
+Route::delete('/formatos/eliminar/{id}', [FormatoController::class, 'destroy']);
 
 
 require __DIR__.'/auth.php';
