@@ -6,7 +6,6 @@ use App\Models\Formato;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Naturaleza;
 use App\Models\Sede;
-use App\Models\TipoEstudio;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -56,14 +55,6 @@ class DatabaseSeeder extends Seeder
             ['nombre' => 'Etanol 70%'],
         ];
 
-        $tiposEstudio = [
-            ['nombre' => 'Estudio citológico cérvico-vaginal'],
-            ['nombre' => 'Estudio hematológico completo'],
-            ['nombre' => 'Estudio microscópico y químico de orina'],
-            ['nombre' => 'Estudio citológico de esputo'],
-            ['nombre' => 'Estudio citológico bucal'],
-        ];
-
         foreach ($sedes as $sede) {
             Sede::create($sede);
         }
@@ -74,10 +65,6 @@ class DatabaseSeeder extends Seeder
 
         foreach ($formatos as $formato) {
             Formato::create($formato);
-        }
-
-        foreach ($tiposEstudio as $tipoEstudio) {
-            TipoEstudio::create($tipoEstudio);
         }
 
          User::factory(10)->create();
