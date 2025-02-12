@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Naturaleza;
+use App\Models\Formato;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Naturaleza;
 use App\Models\Sede;
+use App\Models\TipoEstudio;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +14,8 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Crea las 15 sedes reales, las 10 naturalezas reales y 10 usuarios
-     * aleatorios de prueba.
+     * aleatorios. Crea también los 3 formatos de muestra y los 5 tipos
+     * de estudio.
      */
     public function run(): void
     {
@@ -47,12 +50,34 @@ class DatabaseSeeder extends Seeder
             ['codigo' => 'F', 'nombre' => 'Frotis'],
         ];
 
+        $formatos = [
+            ['nombre' => 'Fresco'],
+            ['nombre' => 'Formol'],
+            ['nombre' => 'Etanol 70%'],
+        ];
+
+        $tiposEstudio = [
+            ['nombre' => 'Estudio citológico cérvico-vaginal'],
+            ['nombre' => 'Estudio hematológico completo'],
+            ['nombre' => 'Estudio microscópico y químico de orina'],
+            ['nombre' => 'Estudio citológico de esputo'],
+            ['nombre' => 'Estudio citológico bucal'],
+        ];
+
         foreach ($sedes as $sede) {
             Sede::create($sede);
         }
 
         foreach ($naturalezas as $naturaleza) {
             Naturaleza::create($naturaleza);
+        }
+
+        foreach ($formatos as $formato) {
+            Formato::create($formato);
+        }
+
+        foreach ($tiposEstudio as $tipoEstudio) {
+            TipoEstudio::create($tipoEstudio);
         }
 
          User::factory(10)->create();
