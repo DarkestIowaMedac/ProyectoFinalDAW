@@ -33,7 +33,7 @@ export default function PersInputNaturaleza() {
             Naturaleza de la Muestra:
           </label>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-1 md:grid-cols-2">
+            <div className="grid lg:grid-cols-2 gap-4 sm:grid-cols-1 md:grid-cols-2">
               {naturalezas.map((item) => (
                 <label
                   key={item}
@@ -46,7 +46,7 @@ export default function PersInputNaturaleza() {
                     value={item}
                     checked={naturaleza === item}
                     onChange={handleNaturalezaChange}
-                    className="hidden lg:block md:block sm:block sm:w-full"
+                    className="hidden sm:w-full"
                     />
                   <span className="sm:text-sm md:text-base lg:text-lg">{item}</span>
                 </label>

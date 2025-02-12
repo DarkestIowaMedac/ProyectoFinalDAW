@@ -12,12 +12,40 @@ export default function AuthenticatedLayout({ header, children }) {
     return (
         <div className="bg-slate-300">
             {/* NAVBAR ARRIBA */}
-            <div className="bg-gradient-to-r from-gray-800 via-blue-950 to-slate-950 text-white fixed w-full  z-20 shadow-md shadow-gray-900">
-                <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4">
-                    <div className="flex h-16 justify-between w-full">
-                        <div className="flex items-center">
-                            <div className="text-xl font-semibold hover:text-gray-300">
-                                Creator
+            <div className="bg-gradient-to-r from-gray-800 via-blue-950 to-slate-950 text-white fixed w-full z-20 shadow-md shadow-gray-900">
+                <div className="flex justify-between items-center px-4 h-16 w-full">
+                    {/* Texto alineado a la izquierda */}
+                    <div className="text-xl font-semibold hover:text-gray-300">
+                        Informe Creator
+                    </div>
+
+                    {/* Sección derecha */}
+                    <div className="flex items-center space-x-4">
+                        {/* Menú de usuario */}
+                        <div className="relative group">
+                            <button className="flex items-center space-x-2 focus:outline-none">
+                                <img src="" alt="Avatar" className="w-8 h-8 rounded-full border-blue-400 border-2" />
+                                <span className="hidden md:block text-blue-400">{user.name}</span>
+                            </button>
+
+                            {/* Dropdown con opciones */}
+                            <div className="absolute right-0 mt-2 w-48 bg-gray-900 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                <ResponsiveNavLink 
+                                    href={route('profile.edit')} active={route().current('profile.edit')}
+                                    className="flex items-center w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-600 hover:text-white"
+                                >
+                                    <span className="material-icons text-blue-400 mr-2">account_circle</span>
+                                    Perfil
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('logout')}
+                                    method="post"
+                                    as="button"
+                                    className="flex items-center w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-red-500 hover:text-white"
+                                >
+                                    <span className="material-icons text-blue-400 mr-2">logout</span>
+                                    Cerrar Sesión
+                                </ResponsiveNavLink>
                             </div>
                         </div>
 
@@ -33,6 +61,8 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
             </div>
+
+
 
             {/* Menú lateral */}
             <div
@@ -52,12 +82,15 @@ export default function AuthenticatedLayout({ header, children }) {
                     </p>
 
                     <nav className="space-y-4 mt-5">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}
+                        <ResponsiveNavLink
+                            href={route('dashboard')}
+                            active={route().current('dashboard') ? 'active' : undefined} // Solo pasa "active" si es verdadero
                             className="block py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
                         >
                             <span className="material-icons text-blue-400 mr-2">home</span>
                             Inicio
                         </ResponsiveNavLink>
+
 
                         <ResponsiveNavLink href={route('formulario')} active={route().current('formulario')}
                             className="py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105 flex items-center"

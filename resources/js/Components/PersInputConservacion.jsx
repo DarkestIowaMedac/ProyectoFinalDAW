@@ -72,7 +72,7 @@ export default function PersInputConservacion() {
             Método de Conservación:
           </label>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4">
             {conservaciones.map((item, index) => (
               <label
                 key={index}
