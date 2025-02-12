@@ -54,7 +54,7 @@ return new class extends Migration
 
             $table->string('codigo')->unique();
             $table->date('fecha');
-            $table->string('organo');
+            $table->string('organo')->nullable(); // Permite que el campo organo sea null
             $table->text('descripcionCalidad');
         });
     }
