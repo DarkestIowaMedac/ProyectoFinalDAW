@@ -9,21 +9,27 @@ import { PersInputInterpretacion } from "@/Components/PersInputInterpretacion";
 import { PersInputFotos } from "@/Components/PersInputFotos";
 import axios from 'axios';
 
-// Configura Axios para incluir el token CSRF en todas las solicitudes
 const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
 axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 
 export default function FormInsertLayout() {
+    const [imagenes, setImagenes] = useState([]); // Estado para las imágenes
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Crear un FormData con los datos del formulario
         const formData = new FormData(e.target);
 
+        // Asegurarnos de que las imágenes se agreguen al FormData
+        imagenes.forEach(imagen => {
+            formData.append('imagenes[]', imagen); // 'imagenes[]' para múltiples archivos
+        });
+
         try {
-            // Hacemos la solicitud POST con Axios
-            const response = await axios.post('/crearMuestra', formData, {
+            const response = await axios.post('/ProyectoSubidaNotaDAW/public/crearMuestra', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data', // Específicamos que estamos enviando un formulario con archivos
+                    'Content-Type': 'multipart/form-data', // Especificamos que estamos enviando archivos
                 },
             });
 
@@ -31,6 +37,11 @@ export default function FormInsertLayout() {
         } catch (error) {
             console.error('Error al crear la muestra:', error.response ? error.response.data : error);
         }
+    };
+
+    // Manejo de la carga de imágenes en PersInputFotos
+    const handleImageChange = (newImageUrl) => {
+        setImagenes((prevImages) => [...prevImages, newImageUrl]); // Guardamos la URL de la imagen
     };
 
     return (
@@ -44,7 +55,10 @@ export default function FormInsertLayout() {
                     <PersInputBiopsia />
                     <PersInputCalidad />
                     <PersInputInterpretacion />
-                    <PersInputFotos/>
+                    
+                    {/* Aquí estamos pasando el evento de cambio para que PersInputFotos lo maneje */}
+                    <PersInputFotos onImageChange={handleImageChange} />
+
                     <div className="flex justify-center items-center">
                         <input
                             type="submit"

@@ -20,6 +20,10 @@ export default function PersInputFecha() {
           Fecha de registro
         </h2>
 
+        <label htmlFor="fecha" className="sr-only">
+          Selecciona una fecha de registro
+        </label>
+
         <input
           type="date"
           id="fecha"
@@ -27,9 +31,14 @@ export default function PersInputFecha() {
           value={selectedDate}
           onChange={(event) => setSelectedDate(event.target.value)}
           required
+          aria-label="Seleccione una fecha"
+          aria-describedby="fechaHelp"
+          max={getCurrentDate()} // Restricción de fecha máxima para evitar seleccionar fechas futuras
           className="block w-full lg:p-3 md:p-2 sm:p-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 text-lg md:text-base sm:text-sm"
         />
-
+        <p id="fechaHelp" className="text-sm text-gray-500 mt-2">
+          La fecha no puede ser posterior a la fecha actual.
+        </p>
       </div>
     </div>
   );

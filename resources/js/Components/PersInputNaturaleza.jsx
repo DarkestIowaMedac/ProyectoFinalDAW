@@ -4,18 +4,21 @@ export default function PersInputNaturaleza() {
   const [naturaleza, setNaturaleza] = useState(""); // Estado para la naturaleza seleccionada
   const [naturalezas, setNaturalezas] = useState([]); // Estado para las naturalezas obtenidas
   const [error, setError] = useState(null); // Estado para manejar errores
+  const [isLoading, setIsLoading] = useState(true); // Estado de carga
 
   // Función para obtener las naturalezas desde el backend
   const obtenerNaturalezas = async () => {
     try {
-      const respuesta = await fetch("/ProyectoSubidaNotaDAW/public/verNaturalezas"); // Cambia la URL si es necesario
+      const respuesta = await fetch("/ProyectoSubidaNotaDAW/public/verNaturalezas");
       if (!respuesta.ok) {
         throw new Error(`Error al obtener las naturalezas: ${respuesta.status}`);
       }
-      const datos = await respuesta.json(); // Convierte la respuesta a JSON
+      const datos = await respuesta.json();
       setNaturalezas(datos); // Actualiza el estado con las naturalezas obtenidas
     } catch (error) {
       setError(error.message); // Maneja errores
+    } finally {
+      setIsLoading(false); // Desactiva la carga
     }
   };
 
@@ -39,31 +42,33 @@ export default function PersInputNaturaleza() {
         <div id="naturaleza" className="space-y-3">
           {error ? (
             <p className="text-red-500">Error: {error}</p>
-          ) : naturalezas.length === 0 ? (
+          ) : isLoading ? (
             <p className="text-gray-500">Cargando naturalezas...</p>
           ) : (
             <div className="space-y-4">
               <div className="grid lg:grid-cols-2 gap-4 sm:grid-cols-1 md:grid-cols-2">
                 {naturalezas.map((item) => (
                   <label
-                    key={item.id} // Usa un identificador único de la naturaleza
+                    key={item.id}
+                    htmlFor={`naturaleza-${item.id}`} // Mejora la accesibilidad con htmlFor
                     className={`cursor-pointer p-4 sm:p-2 md:p-3 rounded-lg border-2 text-center text-gray-700 transition duration-700 ease-in-out transform hover:scale-105  
-                      ${
-                        naturaleza === item.codigo
-                          ? "bg-blue-500 text-white border-blue-900 hover:shadow-2xl hover:shadow-blue-500/50"
-                          : "bg-gray-100 border-gray-300 hover:bg-gray-100"
+                      ${naturaleza === item.codigo
+                        ? "bg-blue-500 text-white border-blue-900 hover:shadow-2xl hover:shadow-blue-500/50"
+                        : "bg-gray-100 border-gray-300 hover:bg-gray-100"
                       }`}
                   >
                     <input
                       type="radio"
                       name="naturaleza"
-                      value={item.codigo} // Usa el tipo de estudio como valor
+                      value={item.codigo}
+                      id={`naturaleza-${item.id}`}
                       checked={naturaleza === item.codigo}
                       onChange={handleNaturalezaChange}
+                      disabled={isLoading} // Deshabilitar mientras se carga
                       className="hidden sm:w-full"
                     />
-                    <span className="sm:text-sm md:text-base lg:text-lg">
-                      {item.codigo} {/* Muestra el tipo de estudio */}
+                    <span className="sm:text-sm md:text-base lg:text-lg" aria-label={`Naturaleza: ${item.codigo}`}>
+                      {item.codigo}
                     </span>
                   </label>
                 ))}

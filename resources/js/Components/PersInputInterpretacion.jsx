@@ -1,28 +1,37 @@
 import { useState, useEffect } from "react";
 
 export function PersInputInterpretacion() {
-    const [interpretaciones, setInterpretaciones] = useState([
-        { codigo: "", descripcion: "" },
-    ]);
+    const [interpretaciones, setInterpretaciones] = useState([{ codigo: "", descripcion: "" }]);
     const [códigosDisponibles, setCódigosDisponibles] = useState([]);
     const [todosLosDatos, setTodosLosDatos] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Estado de carga
+    const [error, setError] = useState(null); // Estado de error
 
+    // Cargar los datos de las interpretaciones al montar el componente
     useEffect(() => {
-        // Cargar las interpretaciones desde el enlace
-        fetch("/ProyectoSubidaNotaDAW/public/verInterpretaciones")
-            .then((response) => response.json())
-            .then((data) => {
+        const cargarDatos = async () => {
+            try {
+                const response = await fetch("/ProyectoSubidaNotaDAW/public/verInterpretaciones");
+                const data = await response.json();
                 setTodosLosDatos(data); // Guardamos todos los datos
-                const códigos = data.map((item) => item.codigo); // Solo los códigos
+                const códigos = data.map((item) => item.codigo); // Extraemos los códigos
                 setCódigosDisponibles(códigos);
-            })
-            .catch((error) => console.error("Error al cargar las interpretaciones:", error));
+            } catch (error) {
+                setError("Error al cargar las interpretaciones.");
+                console.error("Error al cargar las interpretaciones:", error);
+            } finally {
+                setIsLoading(false); // Desactivamos el estado de carga
+            }
+        };
+        cargarDatos();
     }, []);
 
+    // Añadir una nueva interpretación vacía
     const anyadir = () => {
         setInterpretaciones([...interpretaciones, { codigo: "", descripcion: "" }]);
     };
 
+    // Eliminar una interpretación
     const borrar = () => {
         if (interpretaciones.length <= 1) {
             alert("Debe haber mínimo 1 interpretación");
@@ -31,19 +40,20 @@ export function PersInputInterpretacion() {
         }
     };
 
+    // Actualizar el código seleccionado y la descripción correspondiente
     const actualizarCodigo = (indice, nuevoCodigo) => {
         const nuevasInterpretaciones = [...interpretaciones];
         nuevasInterpretaciones[indice].codigo = nuevoCodigo;
 
-        // Encontramos el texto correspondiente al código seleccionado
         const descripcionCorrespondiente = todosLosDatos.find(
             (item) => item.codigo === nuevoCodigo
-        )?.texto || ""; // Si no lo encuentra, pone una cadena vacía
+        )?.texto || ""; // Si no lo encuentra, dejamos la descripción vacía
 
         nuevasInterpretaciones[indice].descripcion = descripcionCorrespondiente;
         setInterpretaciones(nuevasInterpretaciones);
     };
 
+    // Actualizar la descripción manualmente
     const actualizarDescripcion = (indice, nuevaDescripcion) => {
         const nuevasInterpretaciones = [...interpretaciones];
         nuevasInterpretaciones[indice].descripcion = nuevaDescripcion;
@@ -57,50 +67,59 @@ export function PersInputInterpretacion() {
                     Interpretación de la Muestra
                 </h2>
 
-                {interpretaciones.map((interpretacion, index) => (
-                    <div key={index} className="border-b pb-4 mb-4">
-                        {/* Código de Interpretación */}
-                        <label
-                            htmlFor={`codigo-${index}`}
-                            className="block text-lg font-semibold text-gray-700"
-                        >
-                            Código de interpretación:
-                        </label>
-                        <select
-                            name="codigo"
-                            id={`codigo-${index}`}
-                            value={interpretacion.codigo}
-                            onChange={(e) => actualizarCodigo(index, e.target.value)}
-                            required
-                            className="block w-full p-2 xs:p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
-                        >
-                            <option value="" disabled>
-                                Seleccionar Código
-                            </option>
-                            {códigosDisponibles.map((codigo, idx) => (
-                                <option key={idx} value={codigo}>
-                                    {codigo}
-                                </option>
-                            ))}
-                        </select>
+                {/* Manejando el error */}
+                {error && <p className="text-red-500 text-center">{error}</p>}
 
-                        {/* Descripción de la Interpretación */}
-                        <label
-                            htmlFor={`descripcion-${index}`}
-                            className="block text-lg font-semibold text-gray-700 mt-4"
-                        >
-                            Descripción de la interpretación:
-                        </label>
-                        <textarea
-                            id={`descripcion-${index}`}
-                            name="descripcioncalidad"
-                            placeholder="Proporciona más detalles sobre la interpretación..."
-                            value={interpretacion.descripcion}
-                            onChange={(e) => actualizarDescripcion(index, e.target.value)}
-                            className="block w-full p-2 xs:p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 resize-none h-20 xs:h-24"
-                        />
-                    </div>
-                ))}
+                {isLoading ? (
+                    <p className="text-gray-500 text-center">Cargando datos...</p>
+                ) : (
+                    interpretaciones.map((interpretacion, index) => (
+                        <div key={index} className="border-b pb-4 mb-4">
+                            {/* Código de Interpretación */}
+                            <label
+                                htmlFor={`codigo-${index}`}
+                                className="block text-lg font-semibold text-gray-700"
+                            >
+                                Código de interpretación:
+                            </label>
+                            <select
+                                name="codigo"
+                                id={`codigo-${index}`}
+                                value={interpretacion.codigo}
+                                onChange={(e) => actualizarCodigo(index, e.target.value)}
+                                required
+                                className="block w-full p-2 xs:p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                                aria-label={`Código de interpretación ${index + 1}`}
+                            >
+                                <option value="" disabled>
+                                    Seleccionar Código
+                                </option>
+                                {códigosDisponibles.map((codigo, idx) => (
+                                    <option key={idx} value={codigo}>
+                                        {codigo}
+                                    </option>
+                                ))}
+                            </select>
+
+                            {/* Descripción de la Interpretación */}
+                            <label
+                                htmlFor={`descripcion-${index}`}
+                                className="block text-lg font-semibold text-gray-700 mt-4"
+                            >
+                                Descripción de la interpretación:
+                            </label>
+                            <textarea
+                                id={`descripcion-${index}`}
+                                name="descripcioncalidad"
+                                placeholder="Proporciona más detalles sobre la interpretación..."
+                                value={interpretacion.descripcion}
+                                onChange={(e) => actualizarDescripcion(index, e.target.value)}
+                                className="block w-full p-2 xs:p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 resize-none h-20 xs:h-24"
+                                aria-label={`Descripción de interpretación ${index + 1}`}
+                            />
+                        </div>
+                    ))
+                )}
 
                 <div className="flex justify-between flex-wrap md:justify-center sm:justify-center sm:gap-4 md:gap-4">
                     <button
