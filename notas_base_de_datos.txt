@@ -41,7 +41,8 @@ Tabla formatos:
 Tabla calidades:
     - id (PK)
     - idNaturaleza (FK)
-    - nombre (Rellenable - string)
+    - codigo (Rellenable - string)
+    - texto (Rellenable - string)
 
 Tabla users:
     - id (PK)

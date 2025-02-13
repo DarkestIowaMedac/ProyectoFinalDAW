@@ -24,7 +24,8 @@ return new class extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('cascade'); // FK
 
-            $table->string('nombre');
+            $table->string('codigo')->unique();
+            $table->string('texto');
         });
     }
 

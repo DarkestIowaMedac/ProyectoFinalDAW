@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Calidad;
 use App\Models\Formato;
 use App\Models\Interpretacion;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,6 +35,10 @@ class DatabaseSeeder extends Seeder
             ['codigo' => 'V', 'nombre' => 'Valencia'],
             ['codigo' => 'Z', 'nombre' => 'Zaragoza']
         ];
+
+        foreach ($sedes as $sede) {
+            Sede::create($sede);
+        }
 
         $naturalezas = [
             ['codigo' => 'BB', 'tipoEstudio' => 'Biopsia de bazo'],
@@ -79,31 +84,38 @@ class DatabaseSeeder extends Seeder
             ['codigo' => 'EX', 'tipoEstudio' => 'Estudio hematológico completo'],
         ];
 
+        foreach ($naturalezas as $naturaleza) {
+            Naturaleza::create($naturaleza);
+        }
+
         $formatos = [
             ['nombre' => 'Fresco'],
             ['nombre' => 'Formol'],
             ['nombre' => 'Etanol 70%'],
         ];
 
+        foreach ($formatos as $formato) {
+            Formato::create($formato);
+        }
+
         $interpretaciones = [
             ['codigo' => '1.1.', 'texto' => 'Predominio de células epiteliales escamosas superficiales.'],
             ['codigo' => '1.2.', 'texto' => 'Predominio de células epiteliales escamosas intermedias.'],
         ];
 
-        foreach ($sedes as $sede) {
-            Sede::create($sede);
-        }
-
-        foreach ($naturalezas as $naturaleza) {
-            Naturaleza::create($naturaleza);
-        }
-
-        foreach ($formatos as $formato) {
-            Formato::create($formato);
-        }
-
         foreach ($interpretaciones as $interpretacion) {
-            Interpretacion::create($interpretacion);
+            $idNaturaleza = Naturaleza::inRandomOrder()->first()->id; // Obtiene un id de Naturaleza aleatorio
+            Interpretacion::create(array_merge($interpretacion, ['idNaturaleza' => $idNaturaleza]));
+        }
+
+        $calidades = [
+            ['codigo' => 'H.1.', 'texto' => 'Muestra válida para examen.'],
+            ['codigo' => 'H.2.', 'texto' => 'Muestra válida para examen aunque limitada por lipemia.'],
+        ];
+
+        foreach ($calidades as $calidad) {
+            $idNaturaleza = Naturaleza::inRandomOrder()->first()->id; // Obtiene un id de Naturaleza aleatorio
+            Calidad::create(array_merge($calidad, ['idNaturaleza' => $idNaturaleza]));
         }
 
          User::factory(10)->create();

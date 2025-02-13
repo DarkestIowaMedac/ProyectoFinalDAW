@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Interpretacion;
 use App\Models\Naturaleza;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class InterpretacionFactory extends Factory
 {
+    protected $model = Interpretacion::class;
+
     /**
      * Define the model's default state.
      *
@@ -28,6 +31,7 @@ class InterpretacionFactory extends Factory
         return [
             'codigo' => $codigo,
             'texto' => $texto,
+            'idNaturaleza' => Naturaleza::factory(), // Genera una nueva Naturaleza automáticamente
         ];
     }
 }

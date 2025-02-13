@@ -10,13 +10,16 @@ class Calidad extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
+    protected $table = 'calidades';
+
     /**
      * Restringe los campos a los que el usuario podrá escribir datos.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'nombre',
+        'codigo',
+        'texto',
         'idNaturaleza',
     ];
 
