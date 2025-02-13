@@ -21,7 +21,7 @@ export default function Register() {
 
     useEffect(() => {
         // Aquí puedes hacer la llamada para obtener las sedes
-        fetch('/public/sedes') // Asegúrate de que esta URL sea correcta
+        fetch('/ProyectoSubidaNotaDAW/public/sedes') // Asegúrate de que esta URL sea correcta
             .then(response => response.json())
             .then(data => {
                 setSedes(data);

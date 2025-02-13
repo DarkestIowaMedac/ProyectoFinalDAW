@@ -26,7 +26,7 @@ class FormatoController extends Controller
     public function crearFormato(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255|min:3',
+            'nombre' => 'required|string|max:50|min:3',
         ]);
 
         if ($validator->fails()) {
@@ -38,7 +38,7 @@ class FormatoController extends Controller
                 'nombre' => $request->nombre,
             ]);
 
-            return response()->json(['message' => 'Formato creado con éxito', 'formato' => $formato], 201);
+            return response()->json([ 'message' => 'Formato creado con éxito: ' , 'formato' => $formato], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el formato: ' . $e->getMessage()], 500);
         }
@@ -56,7 +56,7 @@ class FormatoController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255|min:3',
+            'nombre' => 'required|string|max:50|min:3',
         ]);
 
         if ($validator->fails()) {

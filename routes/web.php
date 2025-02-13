@@ -40,10 +40,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/sedes', [SedeController::class, 'index']);
 
-
 Route::get('/formatos', [FormatoController::class, 'index']);
-Route::post('/formatos', [FormatoController::class, 'crearFormato']);
-Route::put('/formatos/{id}', [FormatoController::class, 'editarFormato']);
+Route::post('/crearFormatos', [FormatoController::class, 'crearFormato']);
+Route::put('/editarFormatos/{id}', [FormatoController::class, 'editarFormato']);
 Route::delete('/formatos/{id}', [FormatoController::class, 'eliminarFormato']);
 
 require __DIR__.'/auth.php';
