@@ -2,7 +2,7 @@ TABLAS
 
 Tabla muestras:
     - id (PK)
-    - idUsuario (FK)
+    - idUser (FK)
     - idFormato (FK)
     - idSede (FK)
     - idNaturaleza (FK)
