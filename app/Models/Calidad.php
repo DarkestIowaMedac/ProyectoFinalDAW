@@ -17,6 +17,7 @@ class Calidad extends Model
      */
     protected $fillable = [
         'nombre',
+        'idNaturaleza',
     ];
 
     /**
@@ -24,7 +25,7 @@ class Calidad extends Model
      */
     public function muestras()
     {
-        return $this->hasMany(Muestra::class);
+        return $this->hasMany(Muestra::class, 'idCalidad');
     }
 
     /**
@@ -32,6 +33,6 @@ class Calidad extends Model
      */
     public function naturalezas()
     {
-        return $this->belongsTo(Naturaleza::class);
+        return $this->belongsTo(Naturaleza::class, 'idNaturaleza');
     }
 }

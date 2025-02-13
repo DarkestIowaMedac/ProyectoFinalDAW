@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Formato;
+use App\Models\Interpretacion;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Naturaleza;
 use App\Models\Sede;
@@ -12,9 +13,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Crea las 15 sedes reales, las 10 naturalezas reales y 10 usuarios
-     * aleatorios. Crea también los 3 formatos de muestra y los 5 tipos
-     * de estudio.
+     * Crea datos reales y de prueba.
      */
     public function run(): void
     {
@@ -86,6 +85,11 @@ class DatabaseSeeder extends Seeder
             ['nombre' => 'Etanol 70%'],
         ];
 
+        $interpretaciones = [
+            ['codigo' => '1.1.', 'texto' => 'Predominio de células epiteliales escamosas superficiales.'],
+            ['codigo' => '1.2.', 'texto' => 'Predominio de células epiteliales escamosas intermedias.'],
+        ];
+
         foreach ($sedes as $sede) {
             Sede::create($sede);
         }
@@ -96,6 +100,10 @@ class DatabaseSeeder extends Seeder
 
         foreach ($formatos as $formato) {
             Formato::create($formato);
+        }
+
+        foreach ($interpretaciones as $interpretacion) {
+            Interpretacion::create($interpretacion);
         }
 
          User::factory(10)->create();
