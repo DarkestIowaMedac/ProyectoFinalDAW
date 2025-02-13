@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="bg-gradient-to-r from-slate-950 via-blue-950 to-gray-800 text-white p-4 mt-10 w-full fixed bottom-0">
+        <footer className="bg-gradient-to-r from-gray-900 via-blue-950 to-slate-950 text-white p-4 mt-10 w-full fixed bottom-0">
             <div className="max-w-screen-xl mx-auto flex justify-end items-center space-x-6">
                 {/* Espacio para los enlaces */}
                 <div className="space-x-4">

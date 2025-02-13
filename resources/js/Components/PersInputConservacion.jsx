@@ -76,11 +76,11 @@ export default function PersInputConservacion() {
             {conservaciones.map((item, index) => (
               <label
                 key={index}
-                className={`cursor-pointer p-4 rounded-lg border-2 text-center text-gray-700 transition duration-300 ease-in-out transform hover:scale-105 
+                className={`cursor-pointer p-4 rounded-lg border-2 text-center text-gray-700 transition duration-700 ease-in-out transform hover:scale-105 
                 ${
                   selectedValue === item
-                    ? "bg-blue-500 text-white border-blue-600"
-                    : "bg-white border-gray-300 hover:bg-gray-100"
+                    ? "bg-blue-500 text-white border-blue-900"
+                    : "bg-gray-100 border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 <input
@@ -89,12 +89,12 @@ export default function PersInputConservacion() {
                   value={item}
                   checked={selectedValue === item}
                   onChange={handleConservacionChange}
-                  className="hidden"
+                  className="hidden transition duration-700"
                 />
                 <span>{item}</span>
                 <div className="flex justify-center space-x-2 mt-2">
                   <button
-                    className="text-sm px-2 py-1 bg-yellow-500 text-white rounded"
+                    className="text-sm px-2 py-1 bg-blue-950 hover:bg-slate-950 hover:scale-105 transition duration-700 text-white rounded"
                     onClick={(event) => {
                       event.preventDefault();
                       openEditModal(index);
@@ -103,7 +103,7 @@ export default function PersInputConservacion() {
                     Editar
                   </button>
                   <button
-                    className="text-sm px-2 py-1 bg-red-500 text-white rounded"
+                    className="text-sm px-2 py-1 bg-red-600 hover:bg-red-800 hover:scale-105 transition duration-700 text-white rounded"
                     onClick={(e) => {
                       e.preventDefault();
                       setConservaciones(

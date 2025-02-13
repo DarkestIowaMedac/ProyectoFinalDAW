@@ -20,9 +20,13 @@ export default function FormInsertLayout() {
                     <PersInputCalidad />
                     <PersInputInterpretacion />
                     <PersInputFotos/>
-
-                    <input type="submit" class="bg-blue-950 text-white py-3 px-8 rounded-lg justify-center items-center font-semibold text-lg hover:bg-gray-950 hover:scale-105 transition duration-700" />
+                    <div className="flex justify-center items-center">
+                        <input
+                            type="submit"
+                            className="bg-blue-950 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-gray-950 hover:scale-105 transition duration-700"
+                        />
                     </div>
+                </div>
             </form>
         </div>
     );

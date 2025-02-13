@@ -12,19 +12,20 @@ export default function AuthenticatedLayout({ header, children }) {
     return (
         <div className="bg-slate-300">
             {/* NAVBAR ARRIBA */}
-            <div className="bg-gradient-to-r from-gray-800 via-blue-950 to-slate-950 text-white fixed w-full z-20 shadow-md shadow-gray-900">
+            <div className="bg-gradient-to-r from-gray-900 via-blue-950 to-slate-950 text-white fixed w-full z-20 shadow-md shadow-gray-900">
                 <div className="flex justify-between items-center px-4 h-16 w-full">
                     {/* Texto alineado a la izquierda */}
-                    <div className="text-xl font-semibold hover:text-gray-300">
+                    <div className="lg:text-3xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-400 to-white hover:text-gray-300 hover:scale-105 hover:shadow-lg  transition duration-500 ease-in-out">
                         Informe Creator
                     </div>
+
 
                     {/* Sección derecha */}
                     <div className="flex items-center space-x-4">
                         {/* Menú de usuario */}
                         <div className="relative group">
                             <button className="flex items-center space-x-2 focus:outline-none">
-                                <img src="" alt="Avatar" className="w-8 h-8 rounded-full border-blue-400 border-2" />
+                                <img src="logo.png" alt="Avatar" className="w-8 h-8 rounded-full border-blue-400 border-2" />
                                 <span className="hidden md:block text-blue-400">{user.name}</span>
                             </button>
 
@@ -66,7 +67,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
             {/* Menú lateral */}
             <div
-                className={`fixed left-0 top-0 bg-gradient-to-b from-gray-800 via-blue-950 to-slate-950 w-64 h-full shadow-[4px_0px_10px_#111827] mt-16 transition-transform z-50 
+                className={`fixed left-0 top-0 bg-gradient-to-b from-gray-900 via-blue-950 to-slate-950 w-64 h-full shadow-[4px_0px_10px_#111827] mt-16 transition-transform z-50 
                 ${menuOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
             >
                 <div className="p-4">
