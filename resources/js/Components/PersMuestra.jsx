@@ -1,4 +1,4 @@
-export function PersMuestra ({codigo, fecha, organo, funcionborrar}) {
+export function PersMuestra ({codigo, fecha, organo, funcionborrar, funcioneditar}) {
 
     return(
         <div className=" mb-3 bg-gray-700 text-white p-4 rounded-lg shadow-md">
@@ -8,7 +8,7 @@ export function PersMuestra ({codigo, fecha, organo, funcionborrar}) {
                 <h3>Órgano: {organo}</h3>
             </div>
             <div>
-                <button className=" bg-red-900 p-3 m-2 rounded">Editar</button>
+                <button onClick={funcioneditar} className=" bg-red-900 p-3 m-2 rounded">Editar</button>
                 <button onClick={funcionborrar} className="bg-red-900 p-3 m-2 rounded">Eliminar</button>
             </div>
         </div>

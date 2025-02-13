@@ -9,6 +9,7 @@ use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\CalidadesController;
+use App\Http\Controllers\InterpretacionesController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -45,6 +46,8 @@ Route::get('/sedes', [SedeController::class, 'index']);
 Route::get('/verNaturalezas', [NaturalezaController::class, 'verNaturalezas']);
 
 Route::get('/verCalidades', [CalidadesController::class, 'verCalidades']);
+
+Route::get('/verInterpretaciones', [InterpretacionesController::class, 'verInterpretaciones']);
 
 Route::get('/formatos', [FormatoController::class, 'index']);
 Route::get('/formatos/crear', [FormatoController::class, 'create']);

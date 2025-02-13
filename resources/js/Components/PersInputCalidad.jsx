@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function PersInputCalidad() {
-    const [calidades, setCalidades] = useState([
-        "Biopsia1",
-        "Biopsia2",
-        "Biopsia3",
-        "Biopsia4",
-        "Biopsia5",
-    ]);
+    const [calidades, setCalidades] = useState([]);
     const [selectedCalidad, setSelectedCalidad] = useState("");
     const [descripcionCalidad, setDescripcionCalidad] = useState("");
+
+    useEffect(() => {
+        fetch("/ProyectoSubidaNotaDAW/public/verCalidades")
+            .then((response) => response.json())
+            .then((data) => setCalidades(data))
+            .catch((error) => console.error("Error al obtener las calidades:", error));
+    }, []);
+
+    const handleChange = (event) => {
+        const selectedCodigo = event.target.value;
+        setSelectedCalidad(selectedCodigo);
+        
+        const calidadSeleccionada = calidades.find(calidad => calidad.codigo === selectedCodigo);
+        setDescripcionCalidad(calidadSeleccionada ? calidadSeleccionada.texto : "");
+    };
 
     return (
         <div className="flex justify-center p-8 items-center rounded-lg shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
@@ -40,16 +49,16 @@ export function PersInputCalidad() {
                         name="calidad"
                         id="calidad"
                         value={selectedCalidad}
-                        onChange={(e) => setSelectedCalidad(e.target.value)}
+                        onChange={handleChange}
                         required
                         className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
                     >
                         <option value="" disabled>
                             Seleccionar Calidad
                         </option>
-                        {calidades.map((calidad, index) => (
-                            <option value={calidad} key={index}>
-                                {calidad}
+                        {calidades.map((calidad) => (
+                            <option value={calidad.codigo} key={calidad.id}>
+                                {calidad.codigo}
                             </option>
                         ))}
                     </select>
@@ -68,9 +77,9 @@ export function PersInputCalidad() {
                         id="descripcioncalidad"
                         name="descripcioncalidad"
                         value={descripcionCalidad}
-                        onChange={(e) => setDescripcionCalidad(e.target.value)}
-                        placeholder="Proporciona más detalles sobre la calidad de la muestra..."
-                        className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 resize-none h-24"
+                        readOnly
+                        placeholder="La descripción aparecerá aquí..."
+                        className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 resize-none h-24 bg-gray-100"
                     />
                 </div>
             </div>

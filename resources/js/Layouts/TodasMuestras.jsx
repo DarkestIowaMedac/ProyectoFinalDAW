@@ -5,15 +5,20 @@ export function TodasMuestras () {
 
     const [muestras, setMuestras] = useState([])
 
+    const [muestrasok, setMuestrasOK] = useState(false)
+
+
     // Función para obtener las muestras desde el servidor
     const obtenerMuestras = () => {
         fetch("/ProyectoSubidaNotaDAW/public/muestras")
             .then((respuesta) => respuesta.json())
             .then((datos) => {
                 setMuestras(datos); // Actualiza el estado con las muestras obtenidas
+                setMuestrasOK(true)
             })
             .catch((error) => {
                 console.error("Error al obtener las muestras:", error);
+                setMuestrasOK(false)
             });
     };
 
@@ -56,22 +61,29 @@ export function TodasMuestras () {
     };
 
 
-    return(
+    return (
         <>
             {
-                muestras.map((muestra)=>(
-                    <PersMuestra 
-                        key={muestra.id} 
-                        id={muestra.id}
-                        funcionborrar={() => borrarMuestra(muestra.id)} 
-                        codigo={muestra.codigo} 
-                        fecha={muestra.fecha} 
-                        organo={muestra.organo}
-                    >
-                    </PersMuestra>
-                ))
+                muestrasok ? (
+                    muestras.length > 0 ? (
+                        muestras.map((muestra) => (
+                            <PersMuestra 
+                                key={muestra.id} 
+                                id={muestra.id}
+                                funcionborrar={() => borrarMuestra(muestra.id)} 
+                                codigo={muestra.codigo} 
+                                fecha={muestra.fecha} 
+                                organo={muestra.organo}
+                                funcioneditar
+                            />
+                        ))
+                    ) : (
+                        <h1>No hay muestras disponibles</h1>
+                    )
+                ) : (
+                    <h1>Error al cargar las muestras</h1>
+                )
             }
-
         </>
-    )
+    );
 }

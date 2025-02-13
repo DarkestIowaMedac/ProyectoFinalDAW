@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function PersInputBiopsia() {
-    const [biopsias, setBiopsias] = useState([
-        "Biopsia1",
-        "Biopsia2",
-        "Biopsia3",
-        "Biopsia4",
-        "Biopsia5",
-    ]);
+    const [biopsias, setBiopsias] = useState([]);
     const [selectedBiopsy, setSelectedBiopsy] = useState("");
+
+    useEffect(() => {
+        fetch("/ProyectoSubidaNotaDAW/public/verNaturalezas")
+            .then((response) => response.json())
+            .then((data) => setBiopsias(data))
+            .catch((error) => console.error("Error al obtener las biopsias:", error));
+    }, []);
 
     const handleChange = (event) => {
         setSelectedBiopsy(event.target.value);
@@ -50,9 +51,9 @@ export function PersInputBiopsia() {
                         <option value="" disabled>
                             Seleccionar Biopsia
                         </option>
-                        {biopsias.map((biopsia, index) => (
-                            <option value={biopsia} key={index}>
-                                {biopsia}
+                        {biopsias.map((biopsia) => (
+                            <option value={biopsia.codigo} key={biopsia.id}>
+                                {biopsia.tipoEstudio}
                             </option>
                         ))}
                     </select>

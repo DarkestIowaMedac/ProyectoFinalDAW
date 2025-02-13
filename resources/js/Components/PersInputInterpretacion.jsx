@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function PersInputInterpretacion() {
     const [interpretaciones, setInterpretaciones] = useState([
         { codigo: "", descripcion: "" },
     ]);
+    const [códigosDisponibles, setCódigosDisponibles] = useState([]);
+    const [todosLosDatos, setTodosLosDatos] = useState([]);
+
+    useEffect(() => {
+        // Cargar las interpretaciones desde el enlace
+        fetch("/ProyectoSubidaNotaDAW/public/verInterpretaciones")
+            .then((response) => response.json())
+            .then((data) => {
+                setTodosLosDatos(data); // Guardamos todos los datos
+                const códigos = data.map((item) => item.codigo); // Solo los códigos
+                setCódigosDisponibles(códigos);
+            })
+            .catch((error) => console.error("Error al cargar las interpretaciones:", error));
+    }, []);
 
     const anyadir = () => {
         setInterpretaciones([...interpretaciones, { codigo: "", descripcion: "" }]);
@@ -20,6 +34,13 @@ export function PersInputInterpretacion() {
     const actualizarCodigo = (indice, nuevoCodigo) => {
         const nuevasInterpretaciones = [...interpretaciones];
         nuevasInterpretaciones[indice].codigo = nuevoCodigo;
+
+        // Encontramos el texto correspondiente al código seleccionado
+        const descripcionCorrespondiente = todosLosDatos.find(
+            (item) => item.codigo === nuevoCodigo
+        )?.texto || ""; // Si no lo encuentra, pone una cadena vacía
+
+        nuevasInterpretaciones[indice].descripcion = descripcionCorrespondiente;
         setInterpretaciones(nuevasInterpretaciones);
     };
 
@@ -56,9 +77,11 @@ export function PersInputInterpretacion() {
                             <option value="" disabled>
                                 Seleccionar Código
                             </option>
-                            <option value="Código 1">Código 1</option>
-                            <option value="Código 2">Código 2</option>
-                            <option value="Código 3">Código 3</option>
+                            {códigosDisponibles.map((codigo, idx) => (
+                                <option key={idx} value={codigo}>
+                                    {codigo}
+                                </option>
+                            ))}
                         </select>
 
                         {/* Descripción de la Interpretación */}
@@ -78,6 +101,7 @@ export function PersInputInterpretacion() {
                         />
                     </div>
                 ))}
+
                 <div className="flex justify-between flex-wrap md:justify-center sm:justify-center sm:gap-4 md:gap-4">
                     <button
                         className="lg:px-3 lg:py-2 md:px-3 md:py-2 sm:px-2 sm:py-1 bg-blue-950 text-white font-semibold rounded-lg shadow hover:bg-slate-950 transition duration-300 flex-2"
