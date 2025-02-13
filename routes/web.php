@@ -41,13 +41,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/sedes', [SedeController::class, 'index']);
 
 
-Route::get('formatos', [FormatoController::class, 'index']);
-Route::get('formatos/create', [FormatoController::class, 'create']);
-Route::post('formatos', [FormatoController::class, 'store']);
-Route::get('formatos/{formato}', [FormatoController::class, 'show']);
-Route::get('formatos/{formato}/edit', [FormatoController::class, 'edit']);
-Route::put('formatos/{formato}', [FormatoController::class, 'update']);
-Route::delete('formatos/{formato}', [FormatoController::class, 'destroy']);
-
+Route::get('/formatos', [FormatoController::class, 'index']);
+Route::post('/formatos', [FormatoController::class, 'crearFormato']);
+Route::put('/formatos/{id}', [FormatoController::class, 'editarFormato']);
+Route::delete('/formatos/{id}', [FormatoController::class, 'eliminarFormato']);
 
 require __DIR__.'/auth.php';

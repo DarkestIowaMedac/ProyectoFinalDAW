@@ -4,96 +4,93 @@ namespace App\Http\Controllers;
 
 use App\Models\Formato;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FormatoController extends Controller
 {
     /**
-     * Muestra una lista de formatos.
-     *
-     * @return \Illuminate\Http\Response
+     * Muestra todos los formatos en la base de datos.
      */
     public function index()
     {
         $formatos = Formato::all();
-        return response()->json($formatos);
-    }
 
-    /**
-     * Muestra el formulario para crear un nuevo formato.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // Aquí podrías devolver una vista si trabajas con Blade
-        return response()->json(['message' => 'Mostrar formulario de creación']);
+        if ($formatos->isEmpty()) {
+            return response()->json(['message' => 'No se encontraron formatos.'], 404);
+        }
+        return response()->json($formatos, 200);
     }
-
     /**
-     * Almacena un nuevo formato en la base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Crea un nuevo formato en la base de datos.
      */
-    public function store(Request $request)
+    public function crearFormato(Request $request)
     {
-        $validatedData = $request->validate([
-            'nombre' => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255|min:3',
         ]);
 
-        $formato = Formato::create($validatedData);
-        return response()->json(['message' => 'Formato creado con éxito', 'formato' => $formato]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        try {
+            $formato = Formato::create([
+                'nombre' => $request->nombre,
+            ]);
+
+            return response()->json(['message' => 'Formato creado con éxito', 'formato' => $formato], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al crear el formato: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
-     * Muestra un formato específico.
-     *
-     * @param  \App\Models\Formato  $formato
-     * @return \Illuminate\Http\Response
+     * Edita un formato existente en la base de datos.
      */
-    public function show(Formato $formato)
+    public function editarFormato(Request $request, $id)
     {
-        return response()->json($formato);
-    }
+        $formato = Formato::find($id);
 
-    /**
-     * Muestra el formulario para editar un formato existente.
-     *
-     * @param  \App\Models\Formato  $formato
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Formato $formato)
-    {
-        // Aquí podrías devolver una vista si trabajas con Blade
-        return response()->json(['message' => 'Mostrar formulario de edición', 'formato' => $formato]);
-    }
+        if (!$formato) {
+            return response()->json(['error' => 'Formato no encontrado.'], 404);
+        }
 
-    /**
-     * Actualiza un formato existente en la base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Formato  $formato
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Formato $formato)
-    {
-        $validatedData = $request->validate([
-            'nombre' => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255|min:3',
         ]);
 
-        $formato->update($validatedData);
-        return response()->json(['message' => 'Formato actualizado con éxito', 'formato' => $formato]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $formato->nombre = $request->nombre;
+
+        try {
+            $formato->save();
+
+            return response()->json(['message' => 'Formato actualizado con éxito', 'formato' => $formato], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al actualizar el formato: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
      * Elimina un formato de la base de datos.
-     *
-     * @param  \App\Models\Formato  $formato
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Formato $formato)
+    public function eliminarFormato($id)
     {
-        $formato->delete();
-        return response()->json(['message' => 'Formato eliminado con éxito']);
+        $formato = Formato::find($id);
+
+        if (!$formato) {
+            return response()->json(['error' => 'Formato no encontrado.'], 404);
+        }
+
+        try {
+            $formato->delete();
+
+            return response()->json(['message' => 'Formato eliminado con éxito.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al eliminar el formato: ' . $e->getMessage()], 500);
+        }
     }
 }
