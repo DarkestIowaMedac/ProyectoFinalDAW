@@ -7,6 +7,8 @@ use App\Http\Controllers\SedeController;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NaturalezaController;
+use App\Http\Controllers\CalidadesController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -40,6 +42,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/sedes', [SedeController::class, 'index']);
 
+Route::get('/verNaturalezas', [NaturalezaController::class, 'verNaturalezas']);
+
+Route::get('/verCalidades', [CalidadesController::class, 'verCalidades']);
 
 Route::get('/formatos', [FormatoController::class, 'index']);
 Route::get('/formatos/crear', [FormatoController::class, 'create']);
