@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\FormatoController;
+use App\Http\Controllers\InterpretacionController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NaturalezaController;
@@ -46,12 +47,13 @@ Route::get('/verNaturalezas', [NaturalezaController::class, 'verNaturalezas']);
 
 Route::get('/verCalidades', [CalidadesController::class, 'verCalidades']);
 
-Route::get('/formatos', [FormatoController::class, 'index']);
-Route::get('/formatos/crear', [FormatoController::class, 'create']);
-Route::get('/formatos/mostrar/{id}', [FormatoController::class, 'show']);
-Route::get('/formatos/editar/{id}', [FormatoController::class, 'edit']);
-Route::put('/formatos/{id}', [FormatoController::class, 'update']);
-Route::delete('/formatos/eliminar/{id}', [FormatoController::class, 'destroy']);
 
+
+Route::get('/formatos', [FormatoController::class, 'index']);
+Route::post('/crearFormatos', [FormatoController::class, 'crearFormato']);
+Route::put('/editarFormatos/{id}', [FormatoController::class, 'editarFormato']);
+Route::delete('/formatos/{id}', [FormatoController::class, 'eliminarFormato']);
+
+Route::get('/interpretaciones', [InterpretacionController::class, 'index']);
 
 require __DIR__.'/auth.php';
