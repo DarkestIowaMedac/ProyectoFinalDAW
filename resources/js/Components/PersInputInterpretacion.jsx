@@ -121,9 +121,9 @@ export function PersInputInterpretacion() {
                     ))
                 )}
 
-                <div className="flex justify-between flex-wrap md:justify-center sm:justify-center sm:gap-4 md:gap-4">
+                <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row justify-center gap-2 w-full">
                     <button
-                        className="lg:px-3 lg:py-2 md:px-3 md:py-2 sm:px-2 sm:py-1 bg-blue-950 text-white font-semibold rounded-lg shadow hover:bg-slate-950 transition duration-300 flex-2"
+                        className="w-full sm:w-auto lg:px-4 lg:py-2 md:px-4 md:py-2 sm:px-2 sm:py-1 bg-blue-950 text-white font-semibold rounded-lg shadow hover:bg-slate-950 transition duration-300"
                         onClick={(e) => {
                             e.preventDefault();
                             anyadir();
@@ -133,7 +133,7 @@ export function PersInputInterpretacion() {
                     </button>
 
                     <button
-                        className="lg:px-3 lg:py-2 md:px-3 md:py-2 sm:px-2 sm:py-1 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-800 transition duration-300 flex-2"
+                        className="w-full sm:w-auto lg:px-4 lg:py-2 md:px-4 md:py-2 sm:px-3 sm:py-2 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-800 transition duration-300"
                         onClick={(e) => {
                             e.preventDefault();
                             borrar();
@@ -142,6 +142,7 @@ export function PersInputInterpretacion() {
                         Eliminar Interpretación
                     </button>
                 </div>
+
             </div>
         </div>
     );
