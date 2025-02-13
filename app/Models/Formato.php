@@ -24,6 +24,6 @@ class Formato extends Model
      */
     public function muestras()
     {
-        return $this->hasMany(Muestra::class);
+        return $this->hasMany(Muestra::class, 'idFormato');
     }
 }

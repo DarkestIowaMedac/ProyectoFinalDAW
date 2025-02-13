@@ -10,13 +10,17 @@ class Calidad extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
+    protected $table = 'calidades';
+
     /**
      * Restringe los campos a los que el usuario podrá escribir datos.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'nombre',
+        'codigo',
+        'texto',
+        'idNaturaleza',
     ];
 
     /**
@@ -24,14 +28,14 @@ class Calidad extends Model
      */
     public function muestras()
     {
-        return $this->hasMany(Muestra::class);
+        return $this->hasMany(Muestra::class, 'idCalidad');
     }
 
     /**
-     * Una calidad pertenece a un tipo de estudio
+     * Una calidad pertenece a una naturaleza
      */
-    public function tiposEstudios()
+    public function naturalezas()
     {
-        return $this->belongsTo(TipoEstudio::class);
+        return $this->belongsTo(Naturaleza::class, 'idNaturaleza');
     }
 }

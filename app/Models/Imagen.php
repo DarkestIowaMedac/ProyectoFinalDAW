@@ -18,6 +18,7 @@ class Imagen extends Model
     protected $fillable = [
         'ruta',
         'zoom',
+        'idMuestra',
     ];
 
     /**
@@ -25,6 +26,6 @@ class Imagen extends Model
      */
     public function muestra()
     {
-        return $this->belongsTo(Muestra::class);
+        return $this->belongsTo(Muestra::class, 'idMuestra');
     }
 }

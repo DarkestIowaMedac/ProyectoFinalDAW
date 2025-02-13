@@ -17,8 +17,8 @@ return new class extends Migration
             $table->timestamps();
 
             // Campo añadido
-            $table->string('nombre');
             $table->string('codigo');
+            $table->string('tipoEstudio');
         });
     }
 

@@ -1,0 +1,112 @@
+TABLAS
+
+Tabla muestras:
+    - id (PK)
+    - idUser (FK)
+    - idFormato (FK)
+    - idSede (FK)
+    - idNaturaleza (FK)
+    - idCalidad (FK)
+    - codigo (Rellenable - string)
+    - fecha (Rellenable - date)
+    - organo (Rellenable - string)
+    - descripcionCalidad (Rellenable - text)
+
+Tabla naturalezas:
+    - id (PK)
+    - código (Rellenable - string)
+    - tipoEstudio (Rellenable - string)
+
+Tabla interpretaciones:
+    - id (PK)
+    - idNaturaleza (FK)
+    - codigo (Rellenable - string)
+    - texto (Rellenable - text)
+
+Tabla imagenes:
+    - id (PK)
+    - idMuestra (FK)
+    - ruta (Rellenable - string)
+    - zoom (Rellenable - string)
+
+Tabla sedes:
+    - id (PK)
+    - codigo (Rellenable - string)
+    - nombre (Rellenable - string)
+
+Tabla formatos:
+    - id (PK)
+    - nombre (Rellenable - string)
+
+Tabla calidades:
+    - id (PK)
+    - idNaturaleza (FK)
+    - codigo (Rellenable - string)
+    - texto (Rellenable - string)
+
+Tabla users:
+    - id (PK)
+    - idSede (FK)
+    - nombre  (Rellenable - string)
+    - email  (Rellenable - string)
+    - password  (Rellenable - string)
+
+Tabla interpretacion_muestra:
+    - id (PK)
+    - idInterpretacion (FK)
+    - idMuestra (FK)
+    - descripcionInterpretacion (Rellenable - text)
+
+
+ENTIDADES FUERTES:
+Naturaleza
+Sede
+Formato
+Calidad
+User
+Imagen
+
+
+ENTIDADES DÉBILES:
+Muestra
+Interpretacion
+
+
+RELACIONES
+
+- Una naturaleza muchas muestras, una muestra una naturaleza.
+- Una naturaleza muchas interpretaciones, una interpretación una naturaleza.
+- Una naturaleza muchas calidades, una calidad una naturaleza.
+- Una muestra muchas interpretaciones, una interpretación muchas muestras, y en la tabla pivote, la descripción (de una interpretación de una muestra).
+- Una muestra muchas imágenes, una imagen una muestra.
+- Una sede muchas muestras, una muestra una sede.
+- Un formato muchas muestras, una muestra un formato.
+- Un usuario muchas muestras, una muestra un usuario.
+- Una calidad muchas muestras, una muestra una calidad.
+- Una sede muchos usuarios. Un usuario una sede.
+
+Hay que hacer un CRUD de naturalezas para que se puedan añadir naturalezas en el futuro.
+
+Consiste en crear un sistema para registrar muestras con todos sus datos relacionados, que cree un informe. En el informe haberá un código único para cada muestra.
+
+
+NOTAS
+
+En Laravel siempre debe haber un id autoincrementable por tabla.
+Si la muestra es de tipo biopsia, se muestra el órgano. Si no, se queda null por defecto. Por tanto se necesita una validación para cerciorar que se especifique el órgano sólo si es una biopsia. Esta validación debe hacerse en el controlador.
+Código de cada muestra formado por código de naturaleza, año (2 cifras) y número autoincrementable (4 cifras).
+Primero se debería poder filtrar por estudio, y que salgan todas las calidades en función de la muestra para poder elegir una.
+
+Librería para generar pdf: barryvdh/laravel-dompdf
+    composer require barryvdh/laravel-dompdf
+Guía: styde.net/genera-pdfs-en-laravel-con-el-componente-dompdf/
+Para nombrar el archivo, poner fecha usando el método dateNow o algo así.
+
+Cambiar borrado físico por borrado lógico usando soft delete con Laravel.
+En database/migrations, incluir $table->softDeletes();
+En los modelos, incluir softDeletes.
+Ver las 2 fotos.
+
+Al subir a vercel, usar un servicio de alojamiento de archivos para las imágenes. Por ejemplo Cloudinary.
+
+Para crear roles de usuario: https://www.nigmacode.com/laravel/roles-de-usuario-en-laravel

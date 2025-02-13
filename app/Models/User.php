@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'idSede'
+        'idSede',
     ];
 
     /**
@@ -48,11 +48,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Un usuario pertenece a una sede (relación inversa)
+     * Un usuario pertenece a una sede
      */
     public function sede()
     {
-        return $this->belongsTo(Sede::class);
+        return $this->belongsTo(Sede::class, 'idSede');
     }
 
     /**
@@ -60,6 +60,6 @@ class User extends Authenticatable
      */
     public function muestras()
     {
-        return $this->hasMany(Muestra::class);
+        return $this->hasMany(Muestra::class, 'idUser');
     }
 }

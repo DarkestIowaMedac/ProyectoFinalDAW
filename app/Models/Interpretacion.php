@@ -15,9 +15,12 @@ class Interpretacion extends Model
      *
      * @var list<string>
      */
+    protected $table = 'interpretaciones';
+
     protected $fillable = [
         'codigo',
         'texto',
+        'idNaturaleza',
     ];
 
     /**
@@ -37,10 +40,10 @@ class Interpretacion extends Model
     }
 
     /**
-     * Una interpretación pertenece a un tipo de estudio
+     * Una interpretación pertenece a una naturaleza.
      */
-    public function tiposEstudio()
+    public function naturalezas()
     {
-        return $this->belongsTo(TipoEstudio::class);
+        return $this->belongsTo(Naturaleza::class, 'idNaturaleza');
     }
 }

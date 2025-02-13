@@ -20,6 +20,11 @@ class Muestra extends Model
         'descripcionCalidad',
         'fecha',
         'organo',
+        'idUsuario',
+        'idFormato',
+        'idSede',
+        'idNaturaleza',
+        'idCalidad',
     ];
 
     /**
@@ -33,9 +38,9 @@ class Muestra extends Model
      * Ver también:
      * https://desarrolloweb.com/articulos/relaciones-n-a-m-laravel-eloquent.html
      */
-    public function interpretacion()
+    public function interpretaciones()
     {
-        return $this->belongsToMany(interpretacion::class, 'interpretacion_muestra', 'idInterpretacion', 'idMuestra');
+        return $this->belongsToMany(Interpretacion::class, 'interpretacion_muestra', 'idInterpretacion', 'idMuestra');
     }
 
     /**
@@ -43,7 +48,7 @@ class Muestra extends Model
      */
     public function calidad()
     {
-        return $this->belongsTo(Calidad::class);
+        return $this->belongsTo(Calidad::class, 'idCalidad');
     }
 
     /**
@@ -51,7 +56,7 @@ class Muestra extends Model
      */
     public function imagenes()
     {
-        return $this->hasMany(Imagen::class);
+        return $this->hasMany(Imagen::class, 'idMuestra');
     }
 
     /**
@@ -59,7 +64,7 @@ class Muestra extends Model
      */
     public function naturaleza()
     {
-        return $this->belongsTo(Naturaleza::class);
+        return $this->belongsTo(Naturaleza::class, 'idNaturaleza');
     }
 
     /**
@@ -67,7 +72,7 @@ class Muestra extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'idUser');
     }
 
     /**
@@ -75,7 +80,7 @@ class Muestra extends Model
      */
     public function sede()
     {
-        return $this->belongsTo(Sede::class);
+        return $this->belongsTo(Sede::class, 'idSede');
     }
 
     /**
@@ -83,6 +88,6 @@ class Muestra extends Model
      */
     public function formato()
     {
-        return $this->belongsTo(Formato::class);
+        return $this->belongsTo(Formato::class, 'idFormato');
     }
 }

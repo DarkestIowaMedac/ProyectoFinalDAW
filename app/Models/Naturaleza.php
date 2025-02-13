@@ -17,7 +17,7 @@ class Naturaleza extends Model
      */
     protected $fillable = [
         'codigo',
-        'nombre',
+        'tipoEstudio',
     ];
 
     /**
@@ -25,6 +25,6 @@ class Naturaleza extends Model
      */
     public function muestras()
     {
-        return $this->hasMany(Muestra::class);
+        return $this->hasMany(Muestra::class, 'idNaturaleza');
     }
 }
